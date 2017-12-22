@@ -48,23 +48,40 @@ public class AnnotationListener {
             robot.keyRelease(KeyEvent.VK_LEFT);
         }
         else if (content.equals("right")) {
-
+            robot.keyPress(KeyEvent.VK_RIGHT);
+            robot.keyRelease(KeyEvent.VK_RIGHT);
         }
         else if (content.equals("a")) {
-
+            robot.keyPress(KeyEvent.VK_X);
+            robot.keyRelease(KeyEvent.VK_X);
         }
         else if (content.equals("b")) {
-
+            robot.keyPress(KeyEvent.VK_Z);
+            robot.keyRelease(KeyEvent.VK_Z);
         }
-        else if (content.equals("x")) {
-
+        else if (content.equals("ls")) {
+            robot.keyPress(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_A);
         }
+        else if (content.equals("rs")) {
+            robot.keyPress(KeyEvent.VK_S);
+            robot.keyRelease(KeyEvent.VK_S);
+        }
+        /*
         else if (content.equals("y")) {
-
+            robot.keyPress(KeyEvent.VK_Y);
+            robot.keyRelease(KeyEvent.VK_Y);
         }
+        */
         else if (content.equals("select")) {
-
+            robot.keyPress(KeyEvent.VK_BACK_SPACE);
+            robot.keyRelease(KeyEvent.VK_BACK_SPACE);
         }
+        else if (content.equals("start")) {
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        }
+
         /*(if (content.startsWith("!darren"))
         {
             new MessageBuilder(client).appendContent("\uD83D\uDE93 WEE OOO WEE OO \uD83D\uDE93\n\uD83D\uDC6E SEX CRIME DETECTED \uD83D\uDC6E").withChannel(message.getChannel()).send();
@@ -75,7 +92,7 @@ public class AnnotationListener {
         }*/ }
 
         catch (RateLimitException e) {
-            new MessageBuilder(client).appendContent("haha no. didn't code this yet.").withChannel(message.getChannel()).send();
+            new MessageBuilder(client).appendContent("**Rate Limit Reached**.").withChannel(message.getChannel()).send();
         }
     }
 
