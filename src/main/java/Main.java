@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class Main {
 
-    static Emulator emu = Emulator.GBA;
+    static Emulator emu = Emulator.GBA; //change to DS when you want use DS
 
     public static void main(String[] args) throws AWTException {
         IDiscordClient client = Client.createClient(config.token, true); // Gets the client object (from the first example)

@@ -65,95 +65,21 @@ public class AnnotationListener {
     public void onMessageReceivedEvent(MessageReceivedEvent event) throws InterruptedException { // This method is NOT called because it doesn't have the @EventSubscriber annotation
         IMessage message = null;
         int key = 0;
-        boolean pressed = false;
+
         try {
-        message = event.getMessage();
-        if (!message.getChannel().getName().equals("stuff_and_things"))
-            return;
+            message = event.getMessage();
+            if (!message.getChannel().getName().equals("stuff_and_things"))
+                return;
 
-        String content = message.getContent().toLowerCase();
-        if (content.equals("i")) { //u d l r a b x y select //LS RS
-            key = KeyEvent.VK_UP;
-            pressed = true;
-        }
-        else if (content.equals("k")) {
-            key = KeyEvent.VK_DOWN;
-            pressed = true;
-        }
-        else if (content.equals("j")) {
-            key = KeyEvent.VK_LEFT;
-            pressed = true;
-        }
-        else if (content.equals("l")) {
-            key = KeyEvent.VK_RIGHT;
-            pressed = true;
-        }
-
-        else if (content.equals("a")) {
-            key = KeyEvent.VK_X;
-            pressed = true;
-        }
-        else if (content.equals("b")) {
-            key = KeyEvent.VK_Z;
-            pressed = true;
-        }
-        else if (content.equals("q")) {
-            key = KeyEvent.VK_A;
-
-        }
-        else if (content.equals("e")) {
-            key = KeyEvent.VK_S;
-            pressed = true;
-        }
-
-        else if (content.equals("select")) {
-            key = KeyEvent.VK_BACK_SPACE;
-            pressed = true;
-        }
-        else if (content.equals("start")) {
-            key = KeyEvent.VK_ENTER;
-            pressed = true;
-        }
-        /* //DS controls - ABYYX, START SELECT, L R
-        else if (content.equals("a")) {
-            key = KeyEvent.VK_X;
-            pressed = true;
-        }
-        else if (content.equals("b")) {
-            key = KeyEvent.VK_Z;
-            pressed = true;
-        }
-        else if (content.equals("y")) {
-            key = KeyEvent.VK_A;
-            pressed = true;
-        }
-        else if (content.equals("X")) {
-            key = KeyEvent.VK_S;
-            pressed = true;
-        }
-        else if (content.equals("start")) {
-            key = KeyEvent.VK_ENTER;
-            pressed = true;
-        }
-        else if (content.equals("select")) {
-            key = KeyEvent.VK_V;
-            pressed = true;
-        }
-        else if (content.equals("l")) {
-            key = KeyEvent.VK_Q;
-            pressed = true;
-        }
-        else if (content.equals("r")) {
-            key = KeyEvent.VK_W;
-            pressed = true;
-        }
-        // */
-        if (pressed) {
+            String content = message.getContent().toLowerCase();
+            if (!mapping.containsKey(content))
+                return;
+            key = mapping.get(content);
             robot.keyPress(key);
             Thread.sleep(150);
             robot.keyRelease(key);
         }
- }
+
 
         catch (RateLimitException e) {
             new MessageBuilder(client).appendContent("**Rate Limit Reached**.").withChannel(message.getChannel()).send();
