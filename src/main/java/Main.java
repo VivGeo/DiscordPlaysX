@@ -32,19 +32,33 @@ public class Main {
 
     static Emulator emu = Emulator.GBA; //change to DS when you want use DS
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     public static void main(String[] args) throws AWTException, InterruptedException, IOException {
-        Process process = new ProcessBuilder(config.EMULATORPATH).start();
+        final String EMULATORPATH, WTITLE, ETITLE;
+        if (emu == Emulator.GBA) {
+            EMULATORPATH = config.gbaEMULATORPATH;
+            WTITLE = config.gbaWTITLE;
+            ETITLE = config.gbaETITLE;
+        }
+        else if (emu == Emulator.DS) {
+            EMULATORPATH = config.dsEMULATORPATH;
+            WTITLE = config.dsWTITLE;
+            ETITLE = config.dsETITLE;
+        }
+        else {
+            EMULATORPATH = config.gbaEMULATORPATH;
+            WTITLE = config.gbaWTITLE;
+            ETITLE = config.gbaETITLE;
+        }
+        //path
+        //window name
+        //rom name
+        Process process = new ProcessBuilder(EMULATORPATH).start();
         Thread.sleep(1500);
+
+
+
 
         //Open GBA emu
         final User32 user32 = User32.INSTANCE;
@@ -72,7 +86,7 @@ public class Main {
                 //System.out.println("Found window with text " + hWnd
                 //        + ", total " + ++count + " Text: " + wText);
                 if (wText
-                        .equals(config.WTITLE)) {
+                        .equals(WTITLE)) {
                     user32.SetForegroundWindow(hWnd);
                     return false;
                 }
@@ -82,19 +96,8 @@ public class Main {
         Robot robot = new Robot();
         openEmu(robot);
         Thread.sleep(1500);
-        openRom(robot, config.ETITLE.toLowerCase().toCharArray());
-        /*
-        robot.keyPress(KeyEvent.VK_D);
-        robot.keyRelease(KeyEvent.VK_D);
-        robot.keyPress(KeyEvent.VK_PERIOD);
-        robot.keyRelease(KeyEvent.VK_PERIOD);
-        robot.keyPress(KeyEvent.VK_G);
-        robot.keyRelease(KeyEvent.VK_G);
-        robot.keyPress(KeyEvent.VK_B);
-        robot.keyRelease(KeyEvent.VK_B);
-        robot.keyPress(KeyEvent.VK_A);
-        robot.keyRelease(KeyEvent.VK_A);
-        */
+        openRom(robot, ETITLE.toLowerCase().toCharArray());
+
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
