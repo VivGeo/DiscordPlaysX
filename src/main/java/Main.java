@@ -1,6 +1,8 @@
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
 
+import java.io.IOException;
+import java.lang.ProcessBuilder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -14,6 +16,7 @@ import com.sun.jna.win32.StdCallLibrary;
 
 public class Main {
     public interface User32 extends StdCallLibrary {
+
         User32 INSTANCE = (User32) Native.loadLibrary("user32", User32.class);
 
         boolean EnumWindows(WinUser.WNDENUMPROC lpEnumFunc, Pointer arg);
@@ -26,9 +29,22 @@ public class Main {
     }
 
 
+
     static Emulator emu = Emulator.GBA; //change to DS when you want use DS
 
-    public static void main(String[] args) throws AWTException, InterruptedException {
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public static void main(String[] args) throws AWTException, InterruptedException, IOException {
+        Process process = new ProcessBuilder(config.EMULATORPATH).start();
+        Thread.sleep(1500);
 
         //Open GBA emu
         final User32 user32 = User32.INSTANCE;
@@ -65,6 +81,7 @@ public class Main {
         }, null);
         Robot robot = new Robot();
         openEmu(robot);
+        Thread.sleep(1500);
         openRom(robot, config.ETITLE.toLowerCase().toCharArray());
         /*
         robot.keyPress(KeyEvent.VK_D);
