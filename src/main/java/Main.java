@@ -109,10 +109,6 @@ public class Main {
         dispatcher.registerListener(new AnnotationListener(client, robot, emu)); // Registers the @EventSubscriber example class from above
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 
     public Main() {
         super();
@@ -158,11 +154,12 @@ public class Main {
 
     public enum Emulator {GBA, DS};
 
-    private static void openEmu (Robot robot) {
+    private static void openEmu (Robot robot) throws InterruptedException {
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_O);
+        Thread.sleep(250);
         robot.keyRelease(KeyEvent.VK_CONTROL);
-
+        robot.keyRelease(KeyEvent.VK_O);
     }
 
 }
