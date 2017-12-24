@@ -52,8 +52,9 @@ public class Main {
                     return true;
                 }
 
-                System.out.println("Found window with text " + hWnd
-                        + ", total " + ++count + " Text: " + wText);
+                //commented this out
+                //System.out.println("Found window with text " + hWnd
+                //        + ", total " + ++count + " Text: " + wText);
                 if (wText
                         .equals(config.WTITLE)) {
                     user32.SetForegroundWindow(hWnd);
@@ -63,10 +64,9 @@ public class Main {
             }
         }, null);
         Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_O);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_O);
+        openEmu(robot);
+        openRom(robot, config.ETITLE.toLowerCase().toCharArray());
+        /*
         robot.keyPress(KeyEvent.VK_D);
         robot.keyRelease(KeyEvent.VK_D);
         robot.keyPress(KeyEvent.VK_PERIOD);
@@ -77,6 +77,7 @@ public class Main {
         robot.keyRelease(KeyEvent.VK_B);
         robot.keyPress(KeyEvent.VK_A);
         robot.keyRelease(KeyEvent.VK_A);
+        */
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
@@ -88,5 +89,60 @@ public class Main {
         dispatcher.registerListener(new AnnotationListener(client, robot, emu)); // Registers the @EventSubscriber example class from above
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    public Main() {
+        super();
+    }
+
+    private static void openRom(Robot robot, char[] title) {
+        for (char letter: title) {
+            System.out.println(letter);
+            int temp;
+            int hex;
+            if (Character.isLetter(letter)) {
+                temp = (int)letter - 97;
+                hex = 0x41 + temp;
+            }
+            else if (Character.isDigit(letter)) {
+                temp = (int)letter - 49;
+                hex = 0x30 + temp;
+            }
+            else if (letter == ' ') {
+                hex = KeyEvent.VK_SPACE;
+            }
+            else if (letter == '-') {
+                hex = KeyEvent.VK_UNDERSCORE; // I think this is right, anyways
+            }
+            /*
+            else if (letter == '_') { //LOL not touching this yet till after
+
+            }
+            */
+            else if (letter == '.') {
+                hex = KeyEvent.VK_PERIOD;
+            }
+            else {
+                throw new IllegalArgumentException("valid rom names only");
+            }
+            robot.keyPress(hex);
+            robot.keyRelease(hex);
+        }
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+
+    }
+
     public enum Emulator {GBA, DS};
+
+    private static void openEmu (Robot robot) {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_O);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+
+    }
+
 }
