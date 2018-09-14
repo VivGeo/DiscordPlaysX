@@ -9,10 +9,8 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 
-/**
- * Created by Vivek on 12/18/2017.
- */
-public class AnnotationListener {
+
+class AnnotationListener {
 
     IDiscordClient client;
     Robot robot;
@@ -69,7 +67,7 @@ public class AnnotationListener {
 
         try {
             message = event.getMessage();
-            if (!message.getChannel().getName().equals("stuff_and_things"))
+            if (!message.getChannel().getName().equals(config.DISCORD_CHANNEL))
                 return;
 
             String content = message.getContent().toLowerCase();
@@ -92,48 +90,7 @@ public class AnnotationListener {
         }
     }
 
-    private int gbaStringToKeyEvent (String content) {
-        /*
-        if (!message.getChannel().getName().equals("stuff_and_things"))
-            return;
 
-        String content = message.getContent().toLowerCase();
-        */
-        if (content.equals("i")) { //u d l r a b x y select //LS RS
-            return KeyEvent.VK_UP;
-
-        }
-        else if (content.equals("k")) {
-            return KeyEvent.VK_DOWN;
-
-        }
-        else if (content.equals("j")) {
-            return KeyEvent.VK_LEFT;
-
-        }
-        else if (content.equals("l")) {
-            return KeyEvent.VK_RIGHT;
-
-        }
-
-        else if (content.equals("a")) {
-            return KeyEvent.VK_X;
-
-        }
-        else if (content.equals("b")) {
-            return KeyEvent.VK_Z;
-
-        }
-        else if (content.equals("q")) {
-            return KeyEvent.VK_A;
-
-        }
-        else if (content.equals("e")) {
-            return KeyEvent.VK_S;
-
-        }
-        return 0;
-    }
 
 }
 

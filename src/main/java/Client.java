@@ -2,10 +2,8 @@ import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
 import java.awt.Robot;
-/**
- * Created by Vivek on 12/18/2017.
- */
-public class Client {
+
+class Client {
     public static IDiscordClient createClient(String token, boolean login) { // Returns a new instance of the Discord client
         ClientBuilder clientBuilder = new ClientBuilder(); // Creates the ClientBuilder instance
         clientBuilder.withToken(token); // Adds the login info to the builder
