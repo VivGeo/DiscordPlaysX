@@ -26,10 +26,10 @@ class AnnotationListener {
     }
 
     private void populateDSMappings(HashMap<String, Integer> mapping) {
-        mapping.put("i", KeyEvent.VK_UP);
-        mapping.put("j", KeyEvent.VK_LEFT);
-        mapping.put("k", KeyEvent.VK_DOWN);
-        mapping.put("l", KeyEvent.VK_RIGHT);
+        mapping.put("up", KeyEvent.VK_UP);
+        mapping.put("left", KeyEvent.VK_LEFT);
+        mapping.put("down", KeyEvent.VK_DOWN);
+        mapping.put("right", KeyEvent.VK_RIGHT);
         mapping.put("a", KeyEvent.VK_X);
         mapping.put("b", KeyEvent.VK_Z);
         mapping.put("y", KeyEvent.VK_A);
@@ -41,10 +41,10 @@ class AnnotationListener {
     }
 
     private void populateGBAMappings(HashMap<String, Integer> mapping) {
-        mapping.put("i", KeyEvent.VK_UP);
-        mapping.put("j", KeyEvent.VK_LEFT);
-        mapping.put("k", KeyEvent.VK_DOWN);
-        mapping.put("l", KeyEvent.VK_RIGHT);
+        mapping.put("up", KeyEvent.VK_UP);
+        mapping.put("left", KeyEvent.VK_LEFT);
+        mapping.put("down", KeyEvent.VK_DOWN);
+        mapping.put("right", KeyEvent.VK_RIGHT);
         mapping.put("a", KeyEvent.VK_X);
         mapping.put("b", KeyEvent.VK_Z);
         mapping.put("q", KeyEvent.VK_A);
